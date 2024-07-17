@@ -35,7 +35,7 @@
         document.getElementById('fetchRows').addEventListener('click', () => {
             const limit = document.getElementById('rowLimit').value;
 
-            fetch(`http://localhost:3098/api/result?limit=${limit}`)
+            fetch(`http://localhost:3078/api/result?limit=${limit}`)
                 .then(response => response.json())
                 .then(data => {
                     const resultList = document.getElementById('resultList');
