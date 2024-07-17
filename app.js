@@ -40,7 +40,7 @@ app.get('/api/result', async (req, res) => {
     }
 });
 
-const PORT = 3078;
+const PORT = 4068;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
