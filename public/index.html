@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Result Size</title>
+</head>
+<body>
+    <h1>Check Result Size</h1>
+    
+    <button id="initialCheck">Check Result Size</button>
+    <p id="resultCount" style="display:none;">Number of rows: </p>
+    
+    <div id="inputSection" style="display:none;">
+        <label for="rowLimit">Enter number of rows to fetch:</label>
+        <input type="number" id="rowLimit" value="5" min="1">
+        <button id="fetchRows">Fetch Rows</button>
+    </div>
+    
+    <ul id="resultList"></ul>
+
+    <script>
+        document.getElementById('initialCheck').addEventListener('click', () => {
+            fetch('http://localhost:3038/api/result?limit=1')  // Fetch with a dummy limit to get the row count
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('resultCount').innerText = `Number of rows: ${data.count}`;
+                    document.getElementById('resultCount').style.display = 'block';
+                    document.getElementById('inputSection').style.display = 'block';
+                    document.getElementById('initialCheck').style.display = 'none'; // Hide initial check button
+                })
+                .catch(error => console.error('Error:', error));
+        });
+
+        document.getElementById('fetchRows').addEventListener('click', () => {
+            const limit = document.getElementById('rowLimit').value;
+
+            fetch(`http://localhost:3038/api/result?limit=${limit}`)
+                .then(response => response.json())
+                .then(data => {
+                    const resultList = document.getElementById('resultList');
+                    resultList.innerHTML = ''; // Clear previous results
+                    data.rows.forEach(row => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = row.Name; // Display the row data
+                        resultList.appendChild(listItem);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
