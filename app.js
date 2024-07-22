@@ -40,7 +40,8 @@ app.get('/api/result', async (req, res) => {
     }
 });
 
-const PORT = 4028;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+const port = process.env.PORT || 8070; // Define port variable
+
+app.listen(port, () => { // Use the variable name `port` here
+    console.log(`Server is running on port ${port}`);
 });

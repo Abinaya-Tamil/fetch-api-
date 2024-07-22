@@ -21,7 +21,7 @@
 
     <script>
         document.getElementById('initialCheck').addEventListener('click', () => {
-            fetch('http://localhost:3038/api/result?limit=1')  // Fetch with a dummy limit to get the row count
+            fetch('http://localhost:8070/api/result?limit=1')  // Fetch with a dummy limit to get the row count
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('resultCount').innerText = `Number of rows: ${data.count}`;
@@ -35,7 +35,7 @@
         document.getElementById('fetchRows').addEventListener('click', () => {
             const limit = document.getElementById('rowLimit').value;
 
-            fetch(`http://localhost:4028/api/result?limit=${limit}`)
+            fetch(`http://localhost:8070/api/result?limit=${limit}`)
 
 
                 .then(response => response.json())
